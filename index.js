@@ -20,6 +20,11 @@ const menu = [
 // 存儲訂單的數組
 let orders = [];
 
+app.get('/', (req, res) => {
+  res.send('伺服器正常運行');
+});
+
+
 // 獲取菜單
 app.get('/api/menu', (req, res) => {
   res.json(menu);
