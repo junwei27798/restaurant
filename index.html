@@ -53,4 +53,35 @@
 
         function addToOrder(item) {
             order.push(item);
-            alert(item + ' 已加入訂
+            alert(item + ' 已加入訂單');
+        }
+
+        function submitOrder() {
+            // 組織訂單數據
+            const orderData = {
+                items: order.map(item => ({ name: item, quantity: 1 })), // 這裡假設每個項目數量為 1
+                total: order.length * 100 // 假設每個菜品的價格為 100
+            };
+
+            fetch('https://restaurant-e9yh.onrender.com/api/menu', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('成功:', data);
+                alert('訂單提交成功！');
+                // 清空訂單
+                order.length = 0;
+            })
+            .catch((error) => {
+                console.error('錯誤:', error);
+                alert('訂單提交失敗。');
+            });
+        }
+    </script>
+</body>
+</html>
