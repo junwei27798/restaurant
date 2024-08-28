@@ -9,6 +9,11 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
+// 根路由
+app.get('/', (req, res) => {
+  res.send('伺服器正常運行');
+});
+
 // 模擬的菜單數據
 const menu = [
   { id: 1, name: 'Fried Rice', price: 100 },
@@ -19,11 +24,6 @@ const menu = [
 
 // 存儲訂單的數組
 let orders = [];
-
-app.get('/', (req, res) => {
-  res.send('伺服器正常運行');
-});
-
 
 // 獲取菜單
 app.get('/api/menu', (req, res) => {
