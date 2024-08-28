@@ -25,6 +25,10 @@ app.get('/api/menu', (req, res) => {
   res.json(menu);
 });
 
+app.get('/', (req, res) => {
+  res.send('伺服器正常運行');
+});
+
 // 接收訂單
 app.post('/api/orders', (req, res) => {
   const order = req.body;
