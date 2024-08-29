@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>餐廳點單系統</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ff5722;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .cart span {
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+        .menu-item:hover {
+            background-color: #f9f9f9;
+        }
+        .menu-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+        .menu-item div {
+            flex: 1;
+        }
+        .menu-item h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .menu-item p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .menu-item button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .menu-item button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cart" onclick="viewCart()">
+        🛒 <span id="cart-count">0</span>
+    </div>
+
+    <div class="container">
+        <h1>菜單</h1>
+
+        <div class="menu-item">
+            <img src="C:\Users\Junwei\Desktop\炒飯.jpg" alt="炒飯">
+            <div>
+                <h2>炒飯</h2>
+                <p>美味的炒飯，營養豐富。</p>
+            </div>
+            <button onclick="addToCart('炒飯')">加入訂單</button>
+        </div>
+
+        <div class="menu-item">
+            <img src="C:\Users\Junwei\Desktop\炒麵.jpg" alt="炒麵">
+            <div>
+                <h2>炒麵</h2>
+                <p>香氣四溢的炒麵，讓人垂涎欲滴。</p>
+            </div>
+            <button onclick="addToCart('炒麵')">加入訂單</button>
+        </div>
+
+        <div class="menu-item">
+            <img src="C:\Users\Junwei\Desktop\炒米粉.jpg" alt="炒米粉">
+            <div>
+                <h2>炒米粉</h2>
+                <p>口感滑嫩的炒米粉，完美的搭配。</p>
+            </div>
+            <button onclick="addToCart('炒米粉')">加入訂單</button>
+        </div>
+
+        <div class="menu-item">
+            <img src="C:\Users\Junwei\Desktop\滷肉飯.jpg" alt="滷肉飯">
+            <div>
+                <h2>滷肉飯</h2>
+                <p>經典的滷肉飯，讓你滿足。</p>
+            </div>
+            <button onclick="addToCart('滷肉飯')">加入訂單</button>
+        </div>
+
+        <div class="menu-item">
+            <img src="C:\Users\Junwei\Desktop\紫菜蛋花湯.jpg" alt="紫菜蛋花湯">
+            <div>
+                <h2>紫菜蛋花湯</h2>
+                <p>清爽的紫菜蛋花湯，完美的開胃菜。</p>
+            </div>
+            <button onclick="addToCart('紫菜蛋花湯')">加入訂單</button>
+        </div>
+
+        <div class="menu-item">
+            <img src="C:\Users\Junwei\Desktop\玉米排骨湯.jpg" alt="玉米排骨湯">
+            <div>
+                <h2>玉米排骨湯</h2>
+                <p>美味的玉米排骨湯，補充營養。</p>
+            </div>
+            <button onclick="addToCart('玉米排骨湯')">加入訂單</button>
+        </div>
+
+    </div>
+
+    <script>
+        const cart = [];
+
+        function addToCart(item) {
+            cart.push(item);
+            updateCartCount();
+            alert(item + " 已加入訂單！");
+        }
+
+        function updateCartCount() {
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        function viewCart() {
+            if (cart.length === 0) {
+                alert("您的訂單是空的。");
+            } else {
+                alert("您的訂單: " + cart.join(', '));
+            }
+        }
+    </script>
+
+</body>
+</html>
