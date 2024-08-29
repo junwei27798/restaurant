@@ -2,86 +2,104 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>點餐系統</title>
+    <title>餐廳點單系統</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            padding: 20px;
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .menu {
-            margin-top: 20px;
-            width: 80%;
-            max-width: 600px;
         }
         .menu-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 10px;
             border-bottom: 1px solid #ddd;
         }
         .menu-item button {
             padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .menu-item button:hover {
+            background-color: #0056b3;
+        }
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ff0000;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .cart span {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>歡迎來到我們的餐廳</h1>
-    <div class="menu">
-        <div class="menu-item">
-            <span>菜品 1</span>
-            <button onclick="addToOrder('菜品 1')">加入</button>
-        </div>
-        <div class="menu-item">
-            <span>菜品 2</span>
-            <button onclick="addToOrder('菜品 2')">加入</button>
-        </div>
-        <div class="menu-item">
-            <span>菜品 3</span>
-            <button onclick="addToOrder('菜品 3')">加入</button>
-        </div>
+
+    <div class="cart" onclick="viewCart()">
+        🛒 <span id="cart-count">0</span>
     </div>
-    <button onclick="submitOrder()">提交訂單</button>
+
+    <h1>菜單</h1>
+    <div class="menu-item">
+        <span>炒飯</span>
+        <button onclick="addToCart('炒飯')">加入訂單</button>
+    </div>
+    <div class="menu-item">
+        <span>炒麵</span>
+        <button onclick="addToCart('炒麵')">加入訂單</button>
+    </div>
+    <div class="menu-item">
+        <span>炒米粉</span>
+        <button onclick="addToCart('炒米粉')">加入訂單</button>
+    </div>
+    <div class="menu-item">
+        <span>滷肉飯</span>
+        <button onclick="addToCart('滷肉飯')">加入訂單</button>
+    </div>
+    <div class="menu-item">
+        <span>紫菜蛋花湯</span>
+        <button onclick="addToCart('紫菜蛋花湯')">加入訂單</button>
+    </div>
+    <div class="menu-item">
+        <span>玉米排骨湯</span>
+        <button onclick="addToCart('玉米排骨湯')">加入訂單</button>
+    </div>
 
     <script>
-        const order = [];
+        // 訂單數據
+        const cart = [];
 
-        function addToOrder(item) {
-            order.push(item);
-            alert(item + ' 已加入訂單');
+        // 加入訂單的功能
+        function addToCart(item) {
+            cart.push(item);
+            updateCartCount();
+            alert(item + " 已加入訂單！");
         }
 
-        function submitOrder() {
-            // 組織訂單數據
-            const orderData = {
-                items: order.map(item => ({ name: item, quantity: 1 })), // 這裡假設每個項目數量為 1
-                total: order.length * 100 // 假設每個菜品的價格為 100
-            };
+        // 更新購物車數量
+        function updateCartCount() {
+            document.getElementById('cart-count').innerText = cart.length;
+        }
 
-            fetch('https://restaurant-e9yh.onrender.com/api/orders', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(orderData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('成功:', data);
-                alert('訂單提交成功！');
-                // 清空訂單
-                order.length = 0;
-            })
-            .catch((error) => {
-                console.error('錯誤:', error);
-                alert('訂單提交失敗。');
-            });
+        // 查看訂單
+        function viewCart() {
+            if (cart.length === 0) {
+                alert("您的訂單是空的。");
+            } else {
+                alert("您的訂單: " + cart.join(', '));
+            }
         }
     </script>
+
 </body>
 </html>
